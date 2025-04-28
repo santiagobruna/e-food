@@ -12,6 +12,9 @@ export const Imagem = styled.header`
   position: relative;
 
   .container {
+     width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,10 +32,6 @@ export const Logo = styled.img`
     padding-top: 32px;
   }
 
-  @media (max-width: 480px) {
-    max-width: 80px;
-    padding-top: 24px;
-  }
 `;
 
 export const Title = styled.h1`
