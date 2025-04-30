@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CardProduct, Description, Link, TitleFood } from "../Product/style";
+import { CardProduct, Description, StyledLink, TitleFood } from "../Product/style";
 import { cores } from "../../styles";
 import { Container as BaseContainer } from "../Product/style";
 
@@ -19,7 +19,7 @@ export const Container = styled(BaseContainer)`
         padding: 0;
         margin: 8px 0;
     }
-    ${Link}{
+    ${StyledLink}{
         display: block;
         text-align: center;
         background-color: ${cores.ligthPink};

@@ -1,13 +1,14 @@
 import { Banner, BannerContainer, Container, Imagem, SubTitle, Title } from './style'
 import { Logo } from '../../styles'
 import logo from '../../assets/logo-eFood.png'
+import { Link } from 'react-router-dom'
 
 const MassasHeader = () => {
   return (
     <div>
         <Imagem>
           <Container>
-            <a href='/'>Restaurantes</a>
+            <Link to='/'>Restaurantes</Link>
             <Logo src={logo} alt="Logo E-food" />
             <p>0 produto(s) no carrinho</p>
           </Container>

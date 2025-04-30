@@ -1,4 +1,4 @@
-import { CardProduct, Container, Image, TitleFood, Description, Link, Infos } from "./style";
+import { CardProduct, Container, Image, TitleFood, Description, StyledLink, Infos } from "./style";
 import Tag from "../Tag";
 import estrela from '../../assets/estrela.png'
 
@@ -39,7 +39,7 @@ const Product = ({title, assessment,link,description, infos, image, variant= 'la
                     <Description> 
                         {description}
                     </Description>
-                    <Link href="/profile">{link}</Link>
+                    <StyledLink to="/profile">{link}</StyledLink>
                 </div>
             </CardProduct>
         </Container>

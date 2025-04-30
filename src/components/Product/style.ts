@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { cores } from "../../styles";
 import { TagContainer } from "../Tag/style";
+import { Link } from "react-router-dom";
 
 interface CardProductProps {
     variant?: 'default' | 'large';
@@ -65,7 +66,7 @@ export const Description = styled.p`
     font-weight: 400;
     padding: 16px 0;
 `
-export const Link = styled.a`
+export const StyledLink = styled(Link)`
     background-color: ${cores.pink};
     color: #fff;
     font-weight: bold;
