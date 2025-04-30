@@ -10,29 +10,9 @@ export const Imagem = styled.header`
   font-weight: bold;
   padding: 16px 0;
   position: relative;
-
-  .container {
-     width: 100%;
-    max-width: 1240px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
 `;
 
-export const Logo = styled.img`
-    max-width: 124px;
-    padding-top: 64px;
 
-    @media (max-width: 768px) {
-    max-width: 100px;
-    padding-top: 32px;
-  }
-
-`;
 
 export const Title = styled.h1`
   max-width: 538px;

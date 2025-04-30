@@ -1,5 +1,6 @@
 import logo from '../../assets/logo-eFood.png';
-import { Imagem, Logo, Title } from './style';
+import { Imagem, Title } from './style';
+import { Logo } from '../../styles';
 
 const Header = () => {
     return (
