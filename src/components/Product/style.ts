@@ -2,25 +2,29 @@ import styled from "styled-components";
 import { cores } from "../../styles";
 import { TagContainer } from "../Tag/style";
 
+interface CardProductProps {
+    variant?: 'default' | 'large';
+}
+
 export const Container = styled.div`
     max-width: 1240px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
-    padding: 80px 20px 48px 20px; /* padding lateral reduzido */
+    padding: 80px 20px 48px 20px;
     font-size: 14px;
 
     @media (max-width: 1038px) {
         display: block;
         margin-bottom: 0 auto;
-        padding: 80px 6px; /* mais espaçadinho no mobile */
+        padding: 80px 6px; 
     }
 `
 
-export const CardProduct = styled.div`
-    width: 472px;
+export const CardProduct = styled.div<CardProductProps>`
+    width: ${({ variant }) => (variant === 'large' ? '472px' : '320px')};
+    height:  ${({ variant }) => (variant === 'large' ? ' 398px' : '338px')} ;
     max-width: 100%;
-    height: 398px;
     border: 1px solid ${cores.pink};
     position: relative;
     margin: 0 auto;

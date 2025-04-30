@@ -1,4 +1,4 @@
-import styled from "styled-components";
+ import styled from "styled-components";
 import fundo from '../../assets/fundo-eFood.png'; // já puxa aqui
 
 export const Imagem = styled.header`
