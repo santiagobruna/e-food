@@ -1,9 +1,9 @@
+import { Food } from "../../pages/Home";
 import Product from "../Product";
-import Food from "../../models/Food";
 import { Container } from "./style";
 
-export type Props = {
-    massa: Food[];
+type Props = {
+    massa: Food['cardapio'];
 }
 
 const MassasList  = ({massa} : Props) => {
@@ -11,15 +11,13 @@ const MassasList  = ({massa} : Props) => {
         <Container>
             {massa.map((item) => (
                 <Product
-                    key={item.id}
-                    title={item.title}
-                    image={item.image}
-                    description={item.description}
-                    link={item.link}
-                    assessment={item.assessment}
-                    infos={item.infos}
-                    variant="default"
-                />
+                    id={item.id}
+                    titulo={item.nome}
+                    capa={item.foto}
+                    descricao={item.descricao}
+                    link='Adicionar ao carrinho'
+                    variant="default"                
+                    />
             ))}
         </Container>
     )

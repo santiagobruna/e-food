@@ -5,13 +5,13 @@ import estrela from '../../assets/estrela.png'
 type Props = {
     id: number;
     titulo: string;
-    destacado: boolean;
-    tipo: string;
-    avaliacao: string;
+    destacado?: boolean;
+    tipo?: string;
+    avaliacao?: string;
     descricao: string;
     capa: string;
     variant?: 'default' | 'large';
-    link: string
+    link: string;
 }
 
 const Product = ({ id, titulo, destacado, tipo, avaliacao, descricao, capa, variant= 'large', link}: Props) => {

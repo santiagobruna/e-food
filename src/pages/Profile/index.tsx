@@ -1,70 +1,33 @@
-import Food from "../../models/Food";
-import pizza from '../../assets/pizza.png'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import MassasList from "../../components/MassasList";
 import MassasHeader from "../../components/MassasHeader";
-
-const massas: Food[] = [
-    {
-        id: 1,
-        title: 'Pizza',
-        description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        assessment: '',
-        infos: [],
-        image: pizza,
-        link: 'Adicionar ao carrinho'
-    },
-    {
-        id: 2,
-        title: 'Pizza',
-        description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        assessment: '',
-        infos: [],
-        image: pizza,
-        link: 'Adicionar ao carrinho'
-    },
-    {
-        id: 3,
-        title: 'Pizza',
-        description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        assessment: '',
-        infos: [],
-        image: pizza,
-        link: 'Adicionar ao carrinho'
-    },
-    {
-        id: 4,
-        title: 'Pizza',
-        description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        assessment: '',
-        infos: [],
-        image: pizza,
-        link: 'Adicionar ao carrinho'
-    },
-    {
-        id: 5,
-        title: 'Pizza',
-        description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        assessment: '',
-        infos: [],
-        image: pizza,
-        link: 'Adicionar ao carrinho'
-    },
-    {
-        id: 6,
-        title: 'Pizza',
-        description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        assessment: '',
-        infos: [],
-        image: pizza,
-        link: 'Adicionar ao carrinho'
-    },
-] 
+import { Food } from "../Home";
 
 const Profile = () => {
+    const {id} = useParams();
+    const [restaurante, setRestaurante] = useState<Food | null>(null);
+    const [menuItems, setMenuItems] = useState<Food['cardapio']>();
+    useEffect(() => {
+        fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+        .then(res => res.json())
+        .then((res) => {
+            setMenuItems(res.cardapio)
+            setRestaurante(res);
+        });
+    }, [id])
     return(
         <div>
-            <MassasHeader/>
-            <MassasList  massa={massas}/>
+            {restaurante && restaurante.tipo && restaurante.titulo && restaurante.capa && (
+            <>
+                <MassasHeader
+                title={restaurante.tipo}
+                subtitle={restaurante.titulo}
+                backgroundImage={restaurante.capa}
+                />
+                {menuItems && <MassasList massa={menuItems} />}
+            </>
+            )}
         </div>
     )
 }

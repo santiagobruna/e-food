@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Imagem as BaseImagem } from '../../components/Header/style'
 import { Logo, cores } from '../../styles'
-import fundo from '../../assets/fundo.png'
 
 export const Imagem = styled(BaseImagem)`
   height: 186px;
@@ -42,14 +41,21 @@ export const Container = styled.div`
 export const Banner = styled.div`
   width: 100%;
   height: 280px;
-  background-image: url(${fundo});
-  background-repeat: no-repeat;
   background-size: cover;
-  font-weight: bold;
-  padding: 16px 0;
-  position: relative;
-  color: #fff;
-
+  background-position: center;
+  position: relative; 
+  color: ${cores.white};
+  img {
+    object-fit: cover;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1;
+  }
+ 
 `
 export const BannerContainer = styled(Container)`
   display: flex;
@@ -57,7 +63,8 @@ export const BannerContainer = styled(Container)`
   align-items: flex-start;
   justify-content: space-between;
   padding: 25px 16px 32px 16px;
-
+  position: relative;
+  z-index: 2;
 
 `
 export const Title = styled.h2`

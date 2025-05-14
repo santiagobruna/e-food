@@ -3,7 +3,14 @@ import { Logo } from '../../styles'
 import logo from '../../assets/logo-eFood.png'
 import { Link } from 'react-router-dom'
 
-const MassasHeader = () => {
+type MassasHeaderProps = {
+  title: string
+  subtitle: string
+  backgroundImage: string
+}
+
+
+const MassasHeader = ({ title, subtitle, backgroundImage }: MassasHeaderProps) => {
   return (
     <div>
         <Imagem>
@@ -13,11 +20,11 @@ const MassasHeader = () => {
             <p>0 produto(s) no carrinho</p>
           </Container>
         </Imagem>
-        <Banner>
+        <Banner style={{ backgroundImage: `url(${backgroundImage})` }}>
               <BannerContainer>
-                  <Title>Italiana</Title>
+                  <Title>{title}</Title>
                   <SubTitle>
-                    La Dolce Vita Trattoria
+                    {subtitle}
                   </SubTitle>
               </BannerContainer>
         </Banner>
