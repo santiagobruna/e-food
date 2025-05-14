@@ -3,26 +3,35 @@ import Tag from "../Tag";
 import estrela from '../../assets/estrela.png'
 
 type Props = {
-    title: string;
-    description: string;
-    infos?: string[];
-    image: string;
-    assessment?: string;
-    link: string;
+    id: number;
+    titulo: string;
+    destacado: boolean;
+    tipo: string;
+    avaliacao: string;
+    descricao: string;
+    capa: string;
     variant?: 'default' | 'large';
+    link: string
 }
 
-const Product = ({title, assessment,link,description, infos, image, variant= 'large'}: Props) => {
+const Product = ({ id, titulo, destacado, tipo, avaliacao, descricao, capa, variant= 'large', link}: Props) => {
+    const getDescription = (description: string) => {
+        if(description.length > 130){
+            return description.slice(0, 125) + '...'
+        }
+        return description
+    }
+    const infos = destacado ? ["Destaque da semana", tipo] : [tipo];
     return (
         <Container>
             <CardProduct variant={variant}>
-                <Image src={image} alt={title} />
+                <Image src={capa} alt={titulo} />
                 <div className="content">
                     <div className="content-text">
-                        <TitleFood>{title}</TitleFood>
-                        {assessment && (
+                        <TitleFood>{titulo}</TitleFood>
+                        {avaliacao && (
                             <div className="assessment">
-                                <span>{assessment}</span>
+                                <span>{avaliacao}</span>
                                 <img src={estrela} alt="Avaliação" />
                             </div>
                         )}
@@ -37,9 +46,9 @@ const Product = ({title, assessment,link,description, infos, image, variant= 'la
                         </Infos>
                     )}
                     <Description> 
-                        {description}
+                        {getDescription(descricao)}
                     </Description>
-                    <StyledLink to="/profile">{link}</StyledLink>
+                    <StyledLink to={`/product/${id}`}>{link}</StyledLink>
                 </div>
             </CardProduct>
         </Container>

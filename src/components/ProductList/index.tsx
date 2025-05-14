@@ -1,4 +1,5 @@
-import Food from "../../models/Food";
+
+import { Food } from "../../pages/Home";
 import Product from "../Product";
 import { Container } from "../Product/style";
 
@@ -10,15 +11,18 @@ const ProductList = ({food}: Props) => {
     return (
         <Container>
             {food.map(f => (
-                <Product
-                key={f.id}
-                title={f.title}
-                description={f.description}
-                infos={f.infos}
-                image={f.image}
-                link={f.link}
-                assessment={f.assessment}
-                />
+                <li key={f.id}>
+                    <Product
+                    id={f.id}
+                    titulo={f.titulo}
+                    descricao={f.descricao}
+                    tipo={f.tipo}
+                    link="Saiba mais"
+                    capa={f.capa}
+                    avaliacao={f.avaliacao}
+                    destacado={f.destacado}
+                    />
+                </li>
             ))}
             
         </Container>

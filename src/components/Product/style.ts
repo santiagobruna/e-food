@@ -54,7 +54,10 @@ export const CardProduct = styled.div<CardProductProps>`
     }
 `  
 export const Image = styled.img`
-    width: 100%;
+    width: 472px;
+    height: 217px;
+    max-width: 100%;
+    object-fit: cover;
 `
 export const TitleFood = styled.h2`
     font-weight: bold;
