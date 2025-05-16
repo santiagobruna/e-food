@@ -15,7 +15,7 @@ const MassasList  = ({massa} : Props) => {
                     titulo={item.nome}
                     capa={item.foto}
                     descricao={item.descricao}
-                    link='Adicionar ao carrinho'
+                    link='Mais detalhes'
                     variant="default"                
                     />
             ))}

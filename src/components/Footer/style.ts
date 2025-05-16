@@ -3,7 +3,8 @@ import { cores } from "../../styles";
 
 export const Content = styled.div`
     background-color: ${cores.ligthPink};
-    padding: 130px;
+    width: 100%;
+    height: 298px;
 `
 export const List = styled.ul`
     display: flex;
@@ -24,4 +25,5 @@ export const Description = styled.p`
     font-weight: 400;
     text-align: center;
     line-height: 100%;
+    margin-bottom: 40px;
 `
