@@ -39,7 +39,7 @@ export const Image = styled.img`
   object-fit: cover;
 
   @media (max-width: 600px) {
-    width: 90%;
+    width: 220px;
   }
 `
 
