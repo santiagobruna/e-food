@@ -18,6 +18,7 @@ const ProductList = ({food}: Props) => {
                     descricao={f.descricao}
                     tipo={f.tipo}
                     link="Saiba mais"
+                    usarLink={true}
                     capa={f.capa}
                     avaliacao={f.avaliacao}
                     destacado={f.destacado}

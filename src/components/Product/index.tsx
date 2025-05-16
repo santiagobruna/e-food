@@ -1,6 +1,7 @@
 import { CardProduct, Container, Image, TitleFood, Description, StyledLink, Infos } from "./style";
 import Tag from "../Tag";
 import estrela from '../../assets/estrela.png'
+import { Link } from "react-router-dom";
 
 type Props = {
     id: number;
@@ -12,9 +13,11 @@ type Props = {
     capa: string;
     variant?: 'default' | 'large';
     link: string;
+    usarLink?: boolean;
+    onClick?: () => void
 }
 
-const Product = ({ id, titulo, destacado, tipo, avaliacao, descricao, capa, variant= 'large', link}: Props) => {
+const Product = ({ id, titulo, destacado, tipo, avaliacao, descricao, capa, variant= 'large', link, onClick, usarLink}: Props) => {
     const getDescription = (description: string) => {
         if(description.length > 130){
             return description.slice(0, 125) + '...'
@@ -39,8 +42,8 @@ const Product = ({ id, titulo, destacado, tipo, avaliacao, descricao, capa, vari
                     {infos && infos.length > 0 && (
                         <Infos>
                             {infos.map((info, index) => (
-                            <Tag key={info} size={infos.length === 1 ? 'small' : (index === 0 ? 'big' : 'small')}>
-                                {info}
+                            <Tag key={`${info}-${index}`} size={infos.length === 1 ? 'small' : (index === 0 ? 'big' : 'small')}>
+                            {info}
                             </Tag>
                             ))}
                         </Infos>
@@ -48,7 +51,15 @@ const Product = ({ id, titulo, destacado, tipo, avaliacao, descricao, capa, vari
                     <Description> 
                         {getDescription(descricao)}
                     </Description>
-                    <StyledLink to={`/product/${id}`}>{link}</StyledLink>
+                    {usarLink ? (
+                        <StyledLink as={Link} to={`/product/${id}`}>
+                            {link}
+                        </StyledLink>
+                        ) : (
+                        <StyledLink as="button" onClick={onClick}>
+                            {link}
+                        </StyledLink>
+                    )}
                 </div>
             </CardProduct>
         </Container>

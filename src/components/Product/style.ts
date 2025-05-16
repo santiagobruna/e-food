@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { cores } from "../../styles";
 import { TagContainer } from "../Tag/style";
-import { Link } from "react-router-dom";
 
 interface CardProductProps {
     variant?: 'default' | 'large';
@@ -69,12 +68,14 @@ export const Description = styled.p`
     font-weight: 400;
     padding: 16px 0;
 `
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.button`
     background-color: ${cores.pink};
     color: #fff;
     font-weight: bold;
     padding: 4px 6px;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
 `
 export const Infos = styled.div`
     position: absolute;
