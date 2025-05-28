@@ -10,6 +10,7 @@ export const Imagem = styled.header`
   font-weight: bold;
   padding: 16px 0;
   position: relative;
+  z-index: 0;
 `;
 
 

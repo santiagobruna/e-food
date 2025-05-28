@@ -10,8 +10,11 @@ import {
   AddButton,
   CloseButton
 } from './style'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
+import { Food } from '../../pages/Home'
 
-type ProdutoAPI = {
+export type ProdutoAPI = {
   id: number
   nome: string
   descricao: string
@@ -23,12 +26,18 @@ type ProdutoAPI = {
 type ModalProps = {
   id: number
   onClose: () => void
-  adicionarAoCarrinho: () => void
+  food: Food
 }
-
-const Modal = ({ id, onClose, adicionarAoCarrinho }: ModalProps) => {
+const Modal = ({ id, onClose }: ModalProps) => {
   const [produto, setProduto] = useState<ProdutoAPI | null>(null)
-
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    console.log('Produto para adicionar:', produto)
+    if (produto) {
+      dispatch(add(produto))
+      dispatch(open())
+    }
+  }
   useEffect(() => {
     const buscarProduto = async () => {
       try {
@@ -66,7 +75,7 @@ const Modal = ({ id, onClose, adicionarAoCarrinho }: ModalProps) => {
             <Description>{produto.descricao}</Description>
             <Portion>Serve: {produto.porcao}</Portion>
           </div>
-          <AddButton onClick={adicionarAoCarrinho}>
+          <AddButton onClick={addToCart}>
             Adicionar ao carrinho - R$ {produto.preco.toFixed(2).replace('.', ',')}
           </AddButton>
         </Details>

@@ -11,7 +11,6 @@ type Props = {
 const MassasList  = ({massa} : Props) => {
     const [modalAberto, setModalAberto] = useState(false)
     const [produtoIdSelecionado, setProdutoIdSelecionado] = useState<number | null>(null)
-
     const abrirModal = (id: number) => {
         setProdutoIdSelecionado(id)
         setModalAberto(true)
@@ -20,11 +19,6 @@ const MassasList  = ({massa} : Props) => {
     const fecharModal = () => {
         setProdutoIdSelecionado(null)
         setModalAberto(false)
-    }
-
-    const adicionarAoCarrinho = () => {
-        console.log("Produto adicionado ao carrinho:", produtoIdSelecionado)
-        fecharModal()
     }
     return(
         <Container>
@@ -43,10 +37,17 @@ const MassasList  = ({massa} : Props) => {
             ))}
             {modalAberto && produtoIdSelecionado !== null && (
                 <Modal
-                id={produtoIdSelecionado} // Passa apenas o ID para o modal
-                onClose={fecharModal}
-                adicionarAoCarrinho={adicionarAoCarrinho}
-                />
+                    id={produtoIdSelecionado} // Passa apenas o ID para o modal
+                    onClose={fecharModal} food={{
+                        id: 0,
+                        titulo: "",
+                        destacado: false,
+                        tipo: "",
+                        avaliacao: "",
+                        descricao: "",
+                        capa: "",
+                        cardapio: []
+                    }}                />
             )}
         </Container>
     )

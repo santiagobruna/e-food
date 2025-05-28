@@ -5,7 +5,6 @@ import { Logo, cores } from '../../styles'
 export const Imagem = styled(BaseImagem)`
   height: 186px;
   padding: 16px 0;
-
   p {
     font-weight: bold;
     color: #E66767;
@@ -44,6 +43,7 @@ export const Banner = styled.div`
   background-size: cover;
   background-position: center;
   position: relative; 
+  z-index: 0;
   color: ${cores.white};
   img {
     object-fit: cover;
