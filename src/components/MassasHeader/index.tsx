@@ -21,10 +21,10 @@ const MassasHeader = ({ title, subtitle, backgroundImage }: MassasHeaderProps) =
   return (
     <div>
         <Imagem>
-          <Container onClick={openCart}>
+          <Container>
             <Link to='/'>Restaurantes</Link>
             <Logo src={logo} alt="Logo E-food" />
-            <p>{items.length} produto(s) no carrinho</p>
+            <p onClick={openCart}>{items.length} produto(s) no carrinho</p>
           </Container>
         </Imagem>
         <Banner style={{ backgroundImage: `url(${backgroundImage})` }}>
