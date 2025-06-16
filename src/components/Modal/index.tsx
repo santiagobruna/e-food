@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import {
   Overlay,
   Content,
@@ -9,61 +9,69 @@ import {
   Portion,
   AddButton,
   CloseButton
-} from './style'
-import { useDispatch } from 'react-redux'
-import { add, open } from '../../store/reducers/cart'
-import { Food } from '../../pages/Home'
+} from './style';
+import { useDispatch } from 'react-redux';
+import { addItem, openCart } from '../../store/reducers/cart';
+import { Food } from '../../pages/Home';
 
 export type ProdutoAPI = {
-  id: number
-  nome: string
-  descricao: string
-  foto: string
-  porcao: string
-  preco: number
-}
+  prices?: any; // você pode tipar melhor se souber
+  id: number;
+  nome: string;
+  descricao: string;
+  foto: string;
+  porcao: string;
+  preco: number;
+};
 
 type ModalProps = {
-  id: number
-  onClose: () => void
-  food: Food
-}
-const Modal = ({ id, onClose }: ModalProps) => {
-  const [produto, setProduto] = useState<ProdutoAPI | null>(null)
-  const dispatch = useDispatch();
-  const addToCart = () => {
-    console.log('Produto para adicionar:', produto)
-    if (produto) {
-      dispatch(add(produto))
-      dispatch(open())
-    }
-  }
-  useEffect(() => {
-    const buscarProduto = async () => {
-      try {
-        const resposta = await fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-        const restaurantes = await resposta.json()
+  id: number;
+  onClose: () => void;
+  food?: Food;
+};
 
-        // Procura o produto pelo ID em todos os cardápios
-        let encontrado = null
+const Modal = ({ id, onClose }: ModalProps) => {
+  const [produto, setProduto] = useState<ProdutoAPI | null>(null);
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    if (!produto) return;
+
+    dispatch(addItem(produto));
+    dispatch(openCart());
+  };
+
+  useEffect(() => {
+    async function fetchProduto() {
+      try {
+        const res = await fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes');
+        const restaurantes = await res.json();
+
+        let encontrado: ProdutoAPI | null = null;
+
         for (const restaurante of restaurantes) {
-          encontrado = restaurante.cardapio.find((item: ProdutoAPI) => item.id === id)
-          if (encontrado) break
+          encontrado = restaurante.cardapio.find((item: ProdutoAPI) => item.id === id);
+          if (encontrado) break;
         }
 
         if (encontrado) {
-          setProduto(encontrado)
+          setProduto(encontrado);
         } else {
-          console.warn('Produto não encontrado.')
+          console.warn('Produto não encontrado.');
         }
-      } catch (erro) {
-        console.error('Erro ao buscar produto:', erro)
+      } catch (error) {
+        console.error('Erro ao buscar produto:', error);
       }
     }
-    buscarProduto();
-  }, [id])
+    fetchProduto();
+  }, [id]);
 
-  if (!produto) return null 
+  if (!produto) return null;
+
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(produto.preco);
 
   return (
     <Overlay onClick={onClose}>
@@ -76,13 +84,13 @@ const Modal = ({ id, onClose }: ModalProps) => {
             <Portion>Serve: {produto.porcao}</Portion>
           </div>
           <AddButton onClick={addToCart}>
-            Adicionar ao carrinho - R$ {produto.preco.toFixed(2).replace('.', ',')}
+            Adicionar ao carrinho - {precoFormatado}
           </AddButton>
         </Details>
-        <CloseButton onClick={onClose}>×</CloseButton>
+        <CloseButton onClick={onClose} aria-label="Fechar modal">×</CloseButton>
       </Content>
     </Overlay>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;
