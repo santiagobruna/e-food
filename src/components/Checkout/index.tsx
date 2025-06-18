@@ -23,11 +23,6 @@ const Checkout = () => {
             zipCode: '',
             addressNumber: '',
             complement: '',
-            cardOwner: '',
-            cardNumber: '',
-            cardCode:   '',
-            expiresMonth: '',
-            expiresYear: ''
         },
         validationSchema: Yup.object({
             fullName: Yup.string().min(5, 'O nome deve ter pelo menos 5 caracteres').required('Campo obrigatório'),
@@ -36,42 +31,38 @@ const Checkout = () => {
             zipCode: Yup.string().matches(/^\d{5}-\d{3}$/, 'CEP inválido').required('Campo obrigatório'),
             addressNumber: Yup.number().typeError('O número deve ser um valor numérico').required('Campo obrigatório'),
             complement: Yup.string().optional(),
-            cardOwner: Yup.string().required('Campo obrigatório'),
-            cardNumber: Yup.string().required('Campo obrigatório'),
-            cardCode: Yup.number().typeError('Deve ser um número').required('Campo obrigatório'),
-            expiresMonth: Yup.number().typeError('Deve ser um número').required('Campo obrigatório'),
-            expiresYear: Yup.number().typeError('Deve ser um número').required('Campo obrigatório')
         }),
         onSubmit: async (values) => {
             console.log("Submit disparado com valores:", values);
             try {
-                const result = await purchase({
-                products: items.map((item) => ({
-                    id: item.id,
-                    price: item.prices.current as number,
-                })),
-                delivery: {
-                    receiver: values.fullName,
-                    address: {
-                    description: values.addressDescription,
-                    number: Number(values.addressNumber),
-                    zipCode: values.zipCode,
-                    city: values.city,
-                    complement: values.complement,
-                    },
-                },
-                payment: {
-                    card: {
-                    name: values.cardOwner,
-                    number: values.cardNumber,
-                    code: Number(values.cardCode),
-                    expires: {
-                        month: Number(values.expiresMonth),
-                        year: Number(values.expiresYear),
-                    },
-                    },
-                },
-                }).unwrap();
+                    const payload = {
+                        products: items.map((item) => ({
+                        id: item.id,
+                        price: item.preco,
+                        })),
+                        delivery: {
+                        receiver: values.fullName,
+                        address: {
+                            description: values.addressDescription,
+                            number: Number(values.addressNumber),
+                            zipCode: values.zipCode,
+                            city: values.city,
+                            complement: values.complement,
+                        },
+                        },
+                        payment: { 
+                            card: {
+                                name: "Teste Teste",
+                                number: "1234567812345678",
+                                code: 123,
+                                expires: {
+                                    month: 12,
+                                    year: 2025
+                                }
+                            }
+                        }
+                    };
+                const result = await purchase(payload).unwrap();
               // Se chegou aqui, deu tudo certo
                 console.log("Compra realizada com sucesso:", result);
                 dispatch(proceedToPayment());
@@ -89,19 +80,6 @@ const Checkout = () => {
     const handleBackToCart = () => {
         dispatch(backToCartFromCheckout()); 
     };
-    // const handleToPayment = () => {
-    //     dispatch(proceedToPayment())
-    // }
-    // useEffect(() => {
-    //     if (isSuccess) {
-    //         dispatch(clear())
-    //     }
-    //     if (isError) {
-    //         alert(
-    //             'Ocorreu um erro ao finalizar a compra. Por favor, tente novamente.'
-    //         )
-    //     }
-    // }, [isSuccess, isError, dispatch])
     return (
         <CartContainer className={isCheckoutOpen ? 'is-open' : ''}>
             <Overlay onClick={handleBackToCart} />

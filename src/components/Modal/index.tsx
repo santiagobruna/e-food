@@ -15,7 +15,7 @@ import { addItem, openCart } from '../../store/reducers/cart';
 import { Food } from '../../pages/Home';
 
 export type ProdutoAPI = {
-  prices?: any; // você pode tipar melhor se souber
+  prices?: any; 
   id: number;
   nome: string;
   descricao: string;

@@ -81,15 +81,21 @@ type CartState = {
         state.isSuccess = false;
         },
         confirmPaymentSuccess: (state) => {
-        state.isConfirmOpen = true;
-        state.isPaymentOpen = false;
-        state.isCheckoutOpen = false;
-        state.isCartOpen = false;
-        state.isSuccess = true;
+            state.isConfirmOpen = true;
+            state.isSuccess = true;
+            state.isPaymentOpen = false; 
         },
         closeConfirmation: (state) => {
         state.isConfirmOpen = false;
         state.isSuccess = false;
+        },
+        closeConfirmAndClearCart: (state) => {
+            state.isConfirmOpen = false;
+            state.isSuccess = false;
+            state.items = [];
+            state.isCartOpen = false;
+            state.isCheckoutOpen = false;
+            state.isPaymentOpen = false;
         },
     },
     });
@@ -106,6 +112,7 @@ type CartState = {
     confirmPaymentSuccess,
     closeConfirmation,
     closeCheckout,
+    closeConfirmAndClearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
