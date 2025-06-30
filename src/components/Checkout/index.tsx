@@ -13,7 +13,7 @@ import { usePurchaseMutation } from "../../services/api";
 const Checkout = () => {
     const dispatch = useDispatch();
     const { isCheckoutOpen, items } = useSelector((state: RootReducer) => state.cart)
-    const [, { isLoading }] = usePurchaseMutation();
+    const [purchase, { isLoading }] = usePurchaseMutation();
 
     
     const form = useFormik({
@@ -63,11 +63,10 @@ const Checkout = () => {
                             }
                         }
                     };
-
+                await purchase(payload).unwrap();
                 dispatch(proceedToPayment());
             } catch (error) {
                 alert("Ocorreu um erro ao finalizar a compra. Tente novamente.");
-                console.error("Erro ao finalizar compra:", error);
             }
             },
     });
