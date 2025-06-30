@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
 import { CartContainer, Overlay, SideBar } from "../Cart/style";
 import { ButtonContainer, CheckoutButton, Group, Row, Title } from "./style";
@@ -12,7 +13,7 @@ import { usePurchaseMutation } from "../../services/api";
 const Checkout = () => {
     const dispatch = useDispatch();
     const { isCheckoutOpen, items } = useSelector((state: RootReducer) => state.cart)
-    const [purchase, { isLoading }] = usePurchaseMutation();
+    const [, { isLoading }] = usePurchaseMutation();
 
     
     const form = useFormik({
@@ -62,9 +63,7 @@ const Checkout = () => {
                             }
                         }
                     };
-                const result = await purchase(payload).unwrap();
-              // Se chegou aqui, deu tudo certo
-                console.log("Compra realizada com sucesso:", result);
+
                 dispatch(proceedToPayment());
             } catch (error) {
                 alert("Ocorreu um erro ao finalizar a compra. Tente novamente.");

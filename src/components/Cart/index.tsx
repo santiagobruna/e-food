@@ -14,7 +14,9 @@ export const formatPrice = (preco = 0) => {
 const Cart = () => {
     const { isCartOpen, items } = useSelector((state: RootReducer) => state.cart);
     const dispatch = useDispatch();
-
+    if (!isCartOpen || items.length === 0) {
+        return null;
+    }
     const close = () => {
         dispatch(closeCart());
     };

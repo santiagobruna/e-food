@@ -3,6 +3,7 @@ import { RootReducer } from "../store";
 import Cart from "../components/Cart";
 import Checkout from "../components/Checkout";
 import Payment from "../components/Payment";
+import { Mensagem } from "../components/OrderConfirmation";
 
 const CartModalManager: React.FC = () => {
     const { isCartOpen, isCheckoutOpen, isPaymentOpen, isConfirmOpen } = useSelector(
@@ -11,17 +12,13 @@ const CartModalManager: React.FC = () => {
 
     return (
         <>
-        {/* Mostra o Cart se estiver aberto e as outras telas fechadas */}
-        {isCartOpen && !isCheckoutOpen && !isPaymentOpen && !isConfirmOpen && <Cart />}
+        {/* Se chegou no final, só renderiza Mensagem */}
+        {isConfirmOpen && <Mensagem />}
 
-        {/* Mostra o Checkout se estiver aberto */}
-        {isCheckoutOpen && !isPaymentOpen && !isConfirmOpen && <Checkout />}
-
-        {/* Mostra o Payment se estiver aberto */}
-        {isPaymentOpen && !isConfirmOpen && <Payment />}
-
-        {/* Pode incluir o Confirm se tiver esse componente */}
-        {/* {isConfirmOpen && <ConfirmComponent />} */}
+        {/* Fluxo normal */}
+        {!isConfirmOpen && isPaymentOpen && <Payment />}
+        {!isConfirmOpen && isCheckoutOpen && <Checkout />}
+        {!isConfirmOpen && isCartOpen && <Cart />}
         </>
     );
 };

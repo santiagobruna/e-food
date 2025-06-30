@@ -5,22 +5,18 @@ import { RootReducer } from "../../store";
 import {
     backToCheckoutFromPayment,
     confirmPaymentSuccess,
-    closeConfirmAndClearCart,
+    setOrderId,
 } from "../../store/reducers/cart";
 import { formatPrice } from "../Cart";
 import { Button, CartContainer, Overlay, SideBar } from "../../components/Cart/style";
 import { ButtonContainer, Group, Row, Title } from "../Checkout/style";
-import styled from "styled-components";
 import * as Yup from "yup";
 
-const Text = styled.p`
-    margin-bottom: 12px;
-`;
+
 
 const Payment = () => {
     const dispatch = useDispatch();
-    // Adicione isConfirmOpen aqui para que o componente possa usá-lo
-    const { isPaymentOpen, items, isSuccess, isConfirmOpen } = useSelector(
+    const { isPaymentOpen, items } = useSelector(
         (state: RootReducer) => state.cart
     );
     const [purchase, { isLoading }] = usePurchaseMutation();
@@ -80,10 +76,10 @@ const Payment = () => {
                     }
                 };
 
-                await purchase(payload).unwrap();
+                const response = await purchase(payload).unwrap();
+                dispatch(setOrderId(response.orderId));
                 dispatch(confirmPaymentSuccess());
             } catch (error) {
-                console.error("Erro ao processar pagamento:", error);
                 alert("Erro ao processar pagamento. Tente novamente.");
             }
         }
@@ -93,46 +89,11 @@ const Payment = () => {
         dispatch(backToCheckoutFromPayment());
     };
 
-    const handleCloseConfirm = () => {
-        dispatch(closeConfirmAndClearCart());
-    };
-
     return (
         <>
-            {isSuccess ? (
-                <CartContainer className={isConfirmOpen ? "is-open" : ""}>
+            <CartContainer  className={isPaymentOpen ? "is-open" : ""}>
                     <Overlay />
-                    <SideBar className={isConfirmOpen ? "is-open" : ""}>
-                        <Title>
-                            Pedido realizado - <span>#21232</span>
-                        </Title>
-                        <p>
-                            Estamos felizes em informar que seu pedido já está em processo de preparação e, em
-                            breve, será entregue no endereço fornecido.
-                        </p>
-                        <Text>
-                            Gostaríamos de ressaltar que nossos entregadores não estão autorizados a realizar
-                            cobranças extras.
-                        </Text>
-                        <Text>
-                            Lembre-se da importância de higienizar as mãos após o recebimento do pedido,
-                            garantindo assim sua segurança e bem-estar durante a refeição.
-                        </Text>
-                        <Text>
-                            Esperamos que desfrute de uma deliciosa e agradável experiência gastronômica. Bom
-                            apetite!
-                        </Text>
-                        <ButtonContainer>
-                            <Button type="button" onClick={handleCloseConfirm}>
-                                Concluir
-                            </Button>
-                        </ButtonContainer>
-                    </SideBar>
-                </CartContainer>
-            ) : (
-                <CartContainer className={isPaymentOpen ? "is-open" : ""}>
-                    <Overlay />
-                    <SideBar className={isPaymentOpen ? "is-open" : ""}> {/* <-- IMPORTANTE: Adicionado 'className' aqui */}
+                    <SideBar className="is-open">
                         <button className="btn-close" onClick={handleBackToCheckout}>
                             Fechar
                         </button>
@@ -235,8 +196,7 @@ const Payment = () => {
                             </ButtonContainer>
                         </form>
                     </SideBar>
-                </CartContainer>
-            )}
+            </CartContainer> 
         </>
     );
 };
