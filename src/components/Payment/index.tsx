@@ -129,6 +129,7 @@ const Payment = () => {
                                         onChange={form.handleChange}
                                         onBlur={form.handleBlur}
                                         className={form.touched.numeros && form.errors.numeros ? "error" : ""}
+                                        placeholder="1234 5678 9012 3456"
                                     />
                                     {form.touched.numeros && form.errors.numeros && (
                                         <span className="error-message">{form.errors.numeros}</span>
@@ -145,6 +146,7 @@ const Payment = () => {
                                         onChange={form.handleChange}
                                         onBlur={form.handleBlur}
                                         className={form.touched.cvv && form.errors.cvv ? "error" : ""}
+                                        placeholder="123"
                                     />
                                     {form.touched.cvv && form.errors.cvv && (
                                         <span className="error-message">{form.errors.cvv}</span>
@@ -163,6 +165,7 @@ const Payment = () => {
                                         onChange={form.handleChange}
                                         onBlur={form.handleBlur}
                                         className={form.touched.mes && form.errors.mes ? "error" : ""}
+                                        placeholder="02"
                                     />
                                     {form.touched.mes && form.errors.mes && (
                                         <span className="error-message">{form.errors.mes}</span>
@@ -179,6 +182,7 @@ const Payment = () => {
                                         onChange={form.handleChange}
                                         onBlur={form.handleBlur}
                                         className={form.touched.ano && form.errors.ano ? "error" : ""}
+                                        placeholder="2025"
                                     />
                                     {form.touched.ano && form.errors.ano && (
                                         <span className="error-message">{form.errors.ano}</span>

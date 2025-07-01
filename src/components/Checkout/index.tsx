@@ -5,7 +5,7 @@ import { ButtonContainer, CheckoutButton, Group, Row, Title } from "./style";
 import { backToCartFromCheckout, closeCheckout, proceedToPayment } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
 import * as Yup from 'yup'
-// import InputMask from 'react-input-mask'
+import InputMask from 'react-input-mask'
 import { useFormik } from "formik";
 import { usePurchaseMutation } from "../../services/api";
 
@@ -161,6 +161,7 @@ const Checkout = () => {
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
                                 className={form.touched.addressNumber && form.errors.addressNumber ? 'error' : ''}
+                                placeholder="123"
                             />
                             {form.touched.addressNumber && form.errors.addressNumber && (
                                 <span className="error-message">{form.errors.addressNumber}</span>
