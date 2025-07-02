@@ -4,8 +4,7 @@ import { CartContainer, Overlay, SideBar } from "../Cart/style";
 import { ButtonContainer, CheckoutButton, Group, Row, Title } from "./style";
 import { backToCartFromCheckout, closeCheckout, proceedToPayment } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
-import * as Yup from 'yup'
-import InputMask from 'react-input-mask'
+import * as Yup from 'yup';
 import { useFormik } from "formik";
 import { usePurchaseMutation } from "../../services/api";
 

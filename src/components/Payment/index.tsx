@@ -12,8 +12,6 @@ import { Button, CartContainer, Overlay, SideBar } from "../../components/Cart/s
 import { ButtonContainer, Group, Row, Title } from "../Checkout/style";
 import * as Yup from "yup";
 
-
-
 const Payment = () => {
     const dispatch = useDispatch();
     const { isPaymentOpen, items } = useSelector(
@@ -80,6 +78,7 @@ const Payment = () => {
                 dispatch(setOrderId(response.orderId));
                 dispatch(confirmPaymentSuccess());
             } catch (error) {
+                console.log(error)
                 alert("Erro ao processar pagamento. Tente novamente.");
             }
         }
