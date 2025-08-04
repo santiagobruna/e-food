@@ -38,7 +38,7 @@ type PurchasePayload = {
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-    baseUrl: 'https://fake-api-tau.vercel.app/api/efood/',
+    baseUrl: 'https://ebac-fake-api.vercel.app/api/efood/',
     }),
     endpoints: (builder) => ({
     purchase: builder.mutation<PurchaseResponse, PurchasePayload>({

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { api } from '../services/api'; // ou o caminho que tiver usado
+import { api } from '../services/api';
 import cartReducer from './reducers/cart';
 
 export const store = configureStore({

@@ -44,7 +44,7 @@ const Modal = ({ id, onClose }: ModalProps) => {
   useEffect(() => {
     async function fetchProduto() {
       try {
-        const res = await fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes');
+        const res = await fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes');
         const restaurantes = await res.json();
 
         let encontrado: ProdutoAPI | null = null;
