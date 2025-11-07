@@ -10,7 +10,7 @@ const Profile = () => {
     const [menuItems, setMenuItems] = useState<Food['cardapio']>();
 
     useEffect(() => {
-        fetch("https://ebac-fake-api.vercel.app/api/efood/restaurantes")
+        fetch("https://api-ebac.vercel.app/api/efood/restaurantes")
         .then((res) => res.json())
         .then((res) => {
             const encontrado = res.find((item: Food) => item.id.toString() === id);

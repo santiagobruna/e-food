@@ -15,6 +15,7 @@ import { addItem, openCart } from '../../store/reducers/cart';
 import { Food } from '../../pages/Home';
 
 export type ProdutoAPI = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   prices?: any; 
   id: number;
   nome: string;
@@ -44,7 +45,7 @@ const Modal = ({ id, onClose }: ModalProps) => {
   useEffect(() => {
     async function fetchProduto() {
       try {
-        const res = await fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes');
+        const res = await fetch('https://api-ebac.vercel.app/api/efood/restaurantes');
         const restaurantes = await res.json();
 
         let encontrado: ProdutoAPI | null = null;
